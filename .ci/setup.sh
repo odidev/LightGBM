@@ -37,12 +37,12 @@ else  # Linux
         echo libamdocl64.so > $OPENCL_VENDOR_PATH/amdocl64.icd
     fi
     if [[ $TRAVIS == "true" ]] || [[ $GITHUB_ACTIONS == "true" ]]; then
-        if [ "${TRAVIS_CPU_ARCH}" == "arm64" ]; then
-            CONDA_URL="https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh"
+        if [ `uname -m` == 'aarch64' ]; then
+            wget -q "https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh" -O conda.sh;
+            chmod +x conda.sh;
         else
-            CONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+            wget -q -O conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
         fi
-        wget -q -O conda.sh $CONDA_URL
     fi
 fi
 
